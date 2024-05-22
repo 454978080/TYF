@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>DOM操作-练习</title>
+		<style type="text/css">
+			body {
+				font-size: 13px;
+				line-height: 25px;
+			}
+
+			table {
+				border-top: 1px solid #333;
+				border-left: 1px solid #333;
+				width: 300px;
+			}
+
+			td {
+				border-right: 1px solid #333;
+				border-bottom: 1px solid #333;
+			}
+
+			.center {
+				text-align: center;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+		<script>
+			$(function() {
+				// 添加新的一行
+				$(".add").click(function(e) {
+					// console.info(e);
+					var tr = $("<tr class='a'></tr>");
+					var book = "<td><input type='text' class='text' id='title'/></td>";
+					var num = "<td><input type='text' class='text' id='num'/></td>";
+					tr.html(book + num);
+					// $("#table").append("<tr>"+book+num+"</tr>");
+					$("#table").append(tr);
+					tr.slideDown();
+
+					// 回车 键盘事件 保存输入在 input 框中的内容
+					$(document).keydown(function(e) {
+						// console.info(e);
+						if (e.key == "Enter") {
+							// console.info($("#title").val()+$("#num").val());
+							// 运用替换节点 将之前的input框 替换掉
+							$(".a").replaceWith("<tr>" + "<td>" + $("#title").val() + "</td>" + "<td>" +
+								"￥" + $("#num").val() + "</td>" + "</tr>");
+						};
+					});
+				});
+
+				// 删除第二行
+				$(".remove").on("click", function() {
+					// 索引号 2 remove 删除
+					$("tr").eq(2).remove();
+				});
+ //199520410 田一凡
+				// 修改标题样式
+				$(".change").click(function(e) {
+					var book = "<th><input type='text' class='text' id='title1'/></th>";
+					var num = "<th><input type='text' class='text' id='num1'/></th>";
+					var tr = $("th").parent();
+					tr.replaceWith("<tr class='upd ate'>" + book + num + "</tr>");
+					$(document).keydown(function(e) {
+						// console.info(e);
+						if (e.key == "Enter") {
+							// console.info($("#title").val()+$("#num").val());
+							// 运用替换节点 将之前的input框 替换掉
+							$(".update").replaceWith("<tr>" + "<th>" + $("#title1").val() + "</th>" +
+								"<th>" + $("#num1").val() + "</th>" + "</tr>");
+						};
+					});
+				})
+ //199520410 田一凡
+				// 复制最后一行 添加在最后一行
+				$(".cc").click(function() {
+					$("#table tr:last").clone(true).appendTo($("table tr:eq(0)").parent());
+				});
+
+				// 鼠标移动 高亮显示
+				$("tr").mouseover(function() {
+					$(this).css("background-color", "#ffb3b3").siblings().css("background-color", "");
+				});
+				// 鼠标离开后高亮显示取消
+				$("tr").mouseout(function() {
+					$(this).css("background-color", "");
+				});
+			})
+		</script>
+	</head>
+   
+	<body>
+		<table cellspacing="0" cellpadding="0" id="table">
+			<tr>
+				<th>书名</th>
+				<th>价格</th>
+			</tr>
+			<tr>
+				<td>看得见风景的房间</td>
+				<td>￥1.00</td>
+			</tr>
+			<tr>
+				<td>60个瞬间</td>
+				<td>￥1.00</td>
+			</tr>
+		</table>
+		<button type="button" class="add">增加一行</button>
+		<button type="button" class="remove">删除第2行</button>
+		<button type="button" class="change">修改标题样式</button>
+		<button type="button" class="cc">复制最后一行</button>
+
+
+</html>
