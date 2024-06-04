@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>广告</title>
+		<style>
+			.guanbi{
+				 width:10%; 
+			}
+		</style>
+    </head>
+
+    <body>
+        <div class="main">
+            主页面
+        </div>
+        <div class="duilian" id="duilian2">
+            <button onclick="closePopup2()" class="close-button"><img  class="guanbi" src="./img/guanbi.png"></button>
+            <img src="./img/duilian.png">
+        </div>
+        <div class="duilian" style="left: auto; right: 0;" id="duilian1">
+            <button onclick="closePopup1()" class="close-button"><img class="guanbi" src="./img/guanbi.png"></button>
+            <img src="./img/duilian.png">
+        </div>
+        <div class="popup" id="popup">
+            <button onclick="closePopup()" class="close-button"><img class="guanbi" src="./img/guanbi.png"></button>
+            <img src="./img/zuanshi.png">
+        </div>
+    </body>
+    <style>
+        /* 对联广告样式 */
+        .duilian {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        /* 右下角弹窗广告样式 */
+        .popup {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+
+        /* 主页面样式 */
+        .main {
+            position: relative;
+            margin: 0 auto;
+            width: 50%;
+            height: 2000px;
+            background-color: #f0f0f0;
+        }
+
+        /* 关闭广告按钮样式 */
+        .close-button {
+            position: absolute;
+			/* width:30px; */
+            top: 0px;
+            right: 0px;
+        }
+    </style>
+    <script>
+		// 获取广告图片
+		        let tan = document.querySelector('#popup');
+		
+		        // 设置定时器
+		        let bottom = -25;
+		        let timer = setInterval(popup, 30);
+		
+		        function popup() {
+		            if (bottom >= 10) { 
+		                clearInterval(timer);
+		            } else {
+		                bottom += 0.5;
+		                tan.style.bottom = `${bottom}vh`;
+		            }
+		        }
+        // 弹窗广告关闭函数
+        function closePopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+        
+        function closePopup1() {
+            var popup = document.getElementById('duilian1');
+            popup.style.display = 'none';
+        }
+        
+        function closePopup2() {
+            var popup = document.getElementById('duilian2');
+            popup.style.display = 'none';
+        }
+		
+    </script>
